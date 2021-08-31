@@ -1,7 +1,7 @@
 <template>
   <div>
     <tab-bar>
-      <tab-bar-item path="/home" activeColor="#f00">
+      <tab-bar-item path="/home">
         <em slot="item-icon" class="iconfont icon-home-deactivated"></em>
         <em
           slot="item-icon-activated"
@@ -9,7 +9,7 @@
         ></em>
         <div slot="item-text">首页</div>
       </tab-bar-item>
-      <tab-bar-item path="/category" activeColor="#0f0">
+      <tab-bar-item path="/category">
         <em slot="item-icon" class="iconfont icon-category-deactivated"></em>
         <em
           slot="item-icon-activated"
@@ -17,7 +17,7 @@
         ></em>
         <div slot="item-text">分类</div>
       </tab-bar-item>
-      <tab-bar-item path="/shop-cart" activeColor="#00f">
+      <tab-bar-item path="/shop-cart">
         <em slot="item-icon" class="iconfont icon-shop-cart-deactivated"></em>
         <em
           slot="item-icon-activated"
@@ -25,7 +25,7 @@
         ></em>
         <div slot="item-text">购物车</div>
       </tab-bar-item>
-      <tab-bar-item path="/profile" activeColor="purple">
+      <tab-bar-item path="/profile">
         <em slot="item-icon" class="iconfont icon-profile-deactivated"></em>
         <em
           slot="item-icon-activated"
@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import TabBar from "./TabBar.vue";
-import TabBarItem from "./TabBarItem.vue";
+import TabBar from "@/components/common/tabbar/TabBar.vue";
+import TabBarItem from "@/components/common/tabbar/TabBarItem.vue";
 
 export default {
   name: "DefaultTabBar",

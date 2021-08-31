@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style>
-@import "./iconfont/iconfont";
+@import "~@/assets/css/iconfont.css";
 
 .tab-bar-item {
   flex: 1;
