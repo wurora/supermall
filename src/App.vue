@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h2>hello</h2>
     <router-view></router-view>
     <default-tab-bar></default-tab-bar>
   </div>
