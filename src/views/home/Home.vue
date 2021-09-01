@@ -3,7 +3,14 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      @pulling-up="loadMore"
+      @scroll="contentScroll"
+      :pull-up-load="true"
+    >
       <home-swiper :banners="banners"></home-swiper>
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <tab-control
@@ -13,6 +20,8 @@
       ></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
+
+    <back-top @click.native="backClick" v-show="showBackTop"></back-top>
   </div>
 </template>
 
@@ -25,6 +34,7 @@ import NavBar from "@/components/common/navbar/NavBar";
 import TabControl from "@/components/content/tabControl/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
 import Scroll from "@/components/common/scroll/Scroll";
+import BackTop from "@/components/content/backTop/BackTop";
 
 import { getHomeMultidata, getHomeGoods } from "@/network/home";
 
@@ -40,6 +50,7 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
+      showBackTop: false,
     };
   },
   components: {
@@ -50,6 +61,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
+    BackTop,
   },
   created() {
     // 1.请求多个数据
@@ -71,11 +83,15 @@ export default {
     getHomeGoods(type) {
       console.log(this.goods);
       const page = this.goods[type].page + 1;
-      getHomeGoods(type, page).then((res) => {
-        console.log(res);
-        this.goods[type].list.push(...res.data.list);
-        this.goods[type].page++;
-      });
+      getHomeGoods(type, page)
+        .then((res) => {
+          console.log(res);
+          this.goods[type].list.push(...res.data.list);
+          this.goods[type].page++;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     tabClick(index) {
       console.log(index);
@@ -90,6 +106,17 @@ export default {
           this.currentType = "sell";
           break;
       }
+    },
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0, 500);
+    },
+    contentScroll(pos) {
+      this.showBackTop = pos.y < -1000;
+    },
+    loadMore() {
+      console.log("loadMore trigger");
+      this.getHomeGoods(this.currentType);
+      this.$refs.scroll.finishPullUp();
     },
   },
   computed: {
