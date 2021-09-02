@@ -35,15 +35,18 @@ export default {
     });
 
     // 2.监听滚动的位置
-    this.scroll.on("scroll", (pos) => {
-      this.$emit("scroll", pos);
-    });
+    if (this.probeType > 1) {
+      this.scroll.on("scroll", (pos) => {
+        this.$emit("scroll", pos);
+      });
+    }
 
     // 3.监听上拉事件
-    this.scroll.on("pullingUp", () => {
-      console.log("上拉加载更多");
-      this.$emit("pullingUp");
-    });
+    if (this.pullUpLoad) {
+      this.scroll.on("pullingUp", () => {
+        this.$emit("pullingUp");
+      });
+    }
   },
   methods: {
     scrollTo(x, y, time = 300) {
@@ -51,6 +54,13 @@ export default {
     },
     finishPullUp() {
       this.scroll.finishPullUp();
+    },
+    refresh() {
+      this.scroll.refresh();
+    },
+    getScroll() {
+      console.log(this.scroll);
+      return this.scroll ? this.scroll : 0;
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="category" key="category">
     <div class="wrapper">
       <ul class="content">
         <button @click="btnClick">按钮</button>
@@ -130,7 +130,7 @@ export default {
     });
 
     this.scroll.on("scroll", (pos) => {
-      console.log(pos);
+      // console.log(pos);
     });
 
     this.scroll.on("pullingUp", () => {
@@ -140,7 +140,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .wrapper {
   height: 150px;
   background-color: red;
