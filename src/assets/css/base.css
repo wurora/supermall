@@ -17,6 +17,9 @@
   padding: 0;
   margin: 0; 
   box-sizing: border-box;
+
+  /* 解决fastClick点击过快报错问题 */
+  touch-action: pan-y;
 }
 
 body {

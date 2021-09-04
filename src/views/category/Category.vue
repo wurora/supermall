@@ -1,5 +1,5 @@
 <template>
-  <div id="category" key="category">
+  <div id="category" key="category" @click="divClick">
     <div class="wrapper">
       <ul class="content">
         <button @click="btnClick">按钮</button>
@@ -121,6 +121,10 @@ export default {
   methods: {
     btnClick() {
       console.log("btnClick");
+    },
+    divClick() {
+      console.log(this.$toast);
+      this.$toast.changeMessage("Category clicked");
     },
   },
   mounted() {
